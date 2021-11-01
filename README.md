@@ -1,6 +1,7 @@
 # Vue Typescript Toolkit
 
 The Vue Typescript command line interface (CLI) is your go-to tool for developing [vue-typescript][vue-typescript] apps.
+
     vtx create - Create vue typescript template
     vtx generate - Create Pages, Components,Services,Modals & vue Features
 
