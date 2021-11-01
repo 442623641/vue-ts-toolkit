@@ -16,7 +16,7 @@ You can specify a path to nest your feature within any number of subdirectories.
     ```
 
 ### Usage:
-    $ vtx create <name>
+    $ vtx create <project-name>
     $ vtx generate <type> <name>
 
 ### Inputs:
