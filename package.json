@@ -26,6 +26,7 @@
     "vue-cli",
     "devkit",
     "generator",
+    "vue-ts-toolkit",
     "vue-cli-plugin",
     "vue-toolkit",
     "typescript"
@@ -37,7 +38,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/442623641/vue-cli-plugin-ts-generator.git"
+    "url": "https://github.com/442623641/vue-ts-toolkit.git"
   },
   "author": {
     "name": "Leo Zhang"

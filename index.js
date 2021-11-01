@@ -21,7 +21,7 @@ program
   .description("creat vue typescript project", {
     name: 'project name'
   })
-  .action((name, options) => createProject(name, options.template));
+  .action((name, options) => createProject(name));
 
 // 快速生成模版 页面/组件
 program

@@ -30,15 +30,14 @@ vts g page <page-name>
 ```bash
 vts g com <component-name>
 ```
----
 
 ### 创建Modal
 ```bash
 vts g page <modal-name>
 ```
-### 创建Api
+### 创建service Api
 ```bash
-vts g page <modal-name>
+vts g service <modal-name>
 ```
 
 ---
