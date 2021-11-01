@@ -1,0 +1,45 @@
+{
+  "name": "vue-ts-toolkit",
+  "version": "1.0.0",
+  "bin": {
+    "vtx": "./index.js"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@moyuyc/inquirer-autocomplete-prompt": "^1.3.2",
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "cross-spawn": "^7.0.3",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^8.2.0",
+    "json-format": "^1.0.1",
+    "shelljs": "^0.8.4"
+  },
+  "deprecated": false,
+  "description": "tmp",
+  "devDependencies": {},
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "vue",
+    "vue-cli",
+    "devkit",
+    "generator",
+    "vue-cli-plugin",
+    "vue-toolkit",
+    "typescript"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/442623641/vue-cli-plugin-ts-generator.git"
+  },
+  "author": {
+    "name": "Leo Zhang"
+  }
+}
