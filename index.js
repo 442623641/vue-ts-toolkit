@@ -18,7 +18,7 @@ program.name("vtx").version(version, '-v, --version');
 // 创建项目
 program
   .command("create <name>")
-  .description("creat vue typescript project", {
+  .description("create vue typescript project", {
     name: 'project name'
   })
   .action((name, options) => createProject(name));
