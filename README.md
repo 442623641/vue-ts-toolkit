@@ -2,32 +2,29 @@
 
 The Vue Typescript command line interface (CLI) is your go-to tool for developing [vue-typescript][vue-typescript] apps.
 vtx create - Create vue typescript template
-vtx generate - Create Pages, Components, & vue Features
+vtx generate - Create Pages, Components,Services,Modals & vue Features
 
-Automatically create framework features with vtx Generate. This command uses the Angular CLI to generate features
-such as pages, components, directives, services, modal and more.
+Automatically create framework features with vtx Generate. This command uses the commander CLI to generate features such as pages, components, directives, services, modals and more.
 
 You can specify a path to nest your feature within any number of subdirectories. For example, specify a name of "pages/New Page" to generate page files at src/app/pages/new-page/.
 
-To test a generator before file modifications are made, use the --dry-run option.
 
-
-  ### Installation
+### Installation
 
     ```
     npm install -g vue-ts-toolkit
     ```
 
-  ### Usage:
+### Usage:
     $ vtx create <name>
     $ vtx generate <type> <name>
 
-  ### Inputs:
+### Inputs:
 
-    type ............................ The type of feature (e.g. page, component, directive, service)
-    name ............................ The name/path of the feature being generated
+    type ................. The type of feature (e.g. page, component, directive, service)
+    name ................. The name/path of the feature being generated
 
-  ### Examples:
+### Examples:
     $ vtx create myApp 
     $ vtx generate 
     $ vtx generate page
