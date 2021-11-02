@@ -71,16 +71,41 @@ async function generate(type, inputPath, options) {
     let files = await Files.readDir(templatePath);
     // 复制文件
     await Files.copyFilesArr(templatePath, `${filePath}/${extendFileName}`, files);
+    //导出路由模块
+    if (type == 'page' && options.router) {
+      let routerStr = `
+      import { RouteConfig } from 'vue-router'
+      import Layout from '@/layout/index.vue'
+      
+      export const ${fileName}Routing: RouteConfig = {
+        path: '/${fileName}',
+        component: Layout,
+        redirect: '/${fileName}',
+        children: [
+          {
+            path: '',
+            component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),
+            name: '${fileName}-page',
+            meta: {
+              title: '${fileName}',
+              icon: '${fileName}'
+            }
+          }
+        ]
+      }`
+      Files.writeFileSync(filePath, `${fileName}.routing.ts`, routerStr);
+    }
     // 替换文件中的内容
-    let newfiles = await Files.readDir(`${filePath}`);
+    let newfiles = await Files.readDir(filePath);
     await Files.fileStrReplace(`${filePath}`, newfiles, { fileName, type, moduleName: Strings.convertToModule(fileName) });
 
     // 成功提示
-    Log.success(`创建成功：${filePath}/${extendFileName}`);
+    Log.success(`创建成功：${filePath}`);
     newfiles.forEach(v => {
       Log.success(v);
     })
   }
+
 
   //导出模块至index.ts
   if (options.export || options.export === undefined && moduli.export && inputFilePath == moduli.dir) {
