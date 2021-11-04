@@ -39,7 +39,7 @@ async function generate(type, inputPath, options) {
 
   //创建模块文件夹
   if (moduli.floder !== false) {
-    fileName = Strings.convertToPath(fileName);
+    fileName = Strings.toKebabCase(fileName);
     filePath = path.join(filePath, fileName);
     extendFileName = fileName + (moduli.extend ? ('.' + (typeof (moduli.extend) == 'string' ? moduli.extend : type)) : '');
     // 查看文件夹是否存在
@@ -64,7 +64,7 @@ async function generate(type, inputPath, options) {
 
   // 获取模板文件
   if (moduli.templateString) {
-    Files.writeFileSync(filePath, `${extendFileName}.ts`, moduli.templateString, { type, moduleName: type == 'directive' ? fileName : Strings.convertToModule(fileName) })
+    Files.writeFileSync(filePath, `${extendFileName}.ts`, moduli.templateString, { type, moduleName: type == 'directive' ? fileName : Strings.toCamelCase(fileName), fileName })
     Log.success(`创建成功：${filePath}/${extendFileName}.ts`);
   } else {
     let templatePath = path.join(Config.template, '/' + moduli.templatePath);
@@ -72,32 +72,12 @@ async function generate(type, inputPath, options) {
     // 复制文件
     await Files.copyFilesArr(templatePath, `${filePath}/${extendFileName}`, files);
     //导出路由模块
-    if (type == 'page' && options.router) {
-      let routerStr = `
-      import { RouteConfig } from 'vue-router'
-      import Layout from '@/layout/index.vue'
-      
-      export const ${fileName}Routing: RouteConfig = {
-        path: '/${fileName}',
-        component: Layout,
-        redirect: '/${fileName}',
-        children: [
-          {
-            path: '',
-            component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),
-            name: '${fileName}-page',
-            meta: {
-              title: '${fileName}',
-              icon: '${fileName}'
-            }
-          }
-        ]
-      }`
-      Files.writeFileSync(filePath, `${fileName}.routing.ts`, routerStr);
+    if (type == 'page') {
+      routeExport(fileName, options.router, filePath)
     }
     // 替换文件中的内容
     let newfiles = await Files.readDir(filePath);
-    await Files.fileStrReplace(`${filePath}`, newfiles, { fileName, type, moduleName: Strings.convertToModule(fileName) });
+    await Files.fileStrReplace(`${filePath}`, newfiles, { fileName, type, moduleName: Strings.toPascalCase(fileName) });
 
     // 成功提示
     Log.success(`创建成功：${filePath}`);
@@ -111,7 +91,7 @@ async function generate(type, inputPath, options) {
   if (options.export || options.export === undefined && moduli.export && inputFilePath == moduli.dir) {
     let exportStr = '';
     if (moduli.floder) {
-      exportStr = `\nexport { default as ${Strings.convertToModule(fileName)}${Strings.convertToModule(type)} } from './${fileName}/${extendFileName}.vue';`
+      exportStr = `\nexport { default as ${Strings.toPascalCase(fileName)}${Strings.toPascalCase(type)} } from './${fileName}/${extendFileName}.vue';`
     } else {
       exportStr = `\nexport * from './${extendFileName}';`;
     }
@@ -119,3 +99,44 @@ async function generate(type, inputPath, options) {
   }
 
 }
+
+const routeExport = async function (fileName, route, filePath) {
+  let camelfileName = Strings.toCamelCase(fileName), parentPath = fileName, routerStr = '', pageRouteFilePath = filePath, childrenPath = '';
+
+  switch ((route || 'root').toString().toLowerCase()) {
+    case 'layout':
+      let paths = filePath.split('/');
+      if (paths.length > 3) {
+        parentPath = paths[paths.length - 2];
+        camelfileName = Strings.toCamelCase(parentPath)
+        pageRouteFilePath = paths.slice(0, -1).join('/');
+        childrenPath = `/${fileName}`;
+      }
+
+      let pageRouteStr = `\n    {\n      path: '${childrenPath}',\n      component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),\n      name: '${fileName}-page',\n      meta: {\n        title: '${fileName}'\n      }\n    }\n  `
+      let routingFilePath = path.join(pageRouteFilePath, `${camelfileName}.routing.ts`)
+
+      let isExist = await Files.checkFileIsExists(routingFilePath);
+      if (isExist) {
+        Files.replaceTextSync(routingFilePath, [[`}\n  ]\n}`, `},${pageRouteStr}]\n}`]]);
+        return
+      }
+      routerStr = `import { RouteConfig } from 'vue-router'\nimport Layout from '@/layout/index.vue'\n\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${parentPath}',\n  component: Layout,\n  redirect: '/${parentPath}${childrenPath}',\n  meta: {\n    title: '${parentPath}',\n    icon: '${parentPath}'\n  },\n  children: [${pageRouteStr}]\n}`
+      break;
+    case 'root':
+      routerStr = `import { RouteConfig } from 'vue-router'\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${fileName}',\n  component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),\n  name: '${fileName}-page',\n  meta: {\n    title: '${fileName}',\n    icon: '${fileName}'\n  }\n}`
+      break;
+    default:
+      break;
+  }
+
+  let routeFileName = `${camelfileName}.routing.ts`;
+  console.log(pageRouteFilePath, routeFileName)
+  Files.writeFileSync(pageRouteFilePath, routeFileName, routerStr);
+  // 查看router/index.ts是否存在
+  let routerIndexPath = path.join(Config.entry, `src`, 'router/index.ts')
+  let isExist = await Files.checkFileIsExists(routerIndexPath);
+  if (!isExist) return;
+  let routeTag1 = `{\n    path: '/',`;
+  Files.replaceTextSync(routerIndexPath, [['Vue.use\\(VueRouter\\)', `import { ${camelfileName}Routing } from '@${path.join(pageRouteFilePath, routeFileName).slice(3, -3)}'\nVue.use(VueRouter)`], [routeTag1, `${camelfileName}Routing,\n  ${routeTag1}`]]);
+};

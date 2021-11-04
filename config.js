@@ -23,7 +23,7 @@ module.exports = {
             export: false,
             router: true,
             extend: true,
-            floder:true
+            floder: true
         },
         component: {
             commonds: ['component', 'c', 'com'],
@@ -31,16 +31,11 @@ module.exports = {
             export: true,
             dir: 'components',
             extend: true,
-            floder:true
+            floder: true
         },
         service: {
             commonds: ['service', 'api', 's'],
-            templateString: `import { Http } from '@/http';
-            export class $moduleName$Service {
-              static items(data: any) {
-            
-              }
-            }`,
+            templateString: `import { Http } from '@/http';\nexport class $moduleName$Service {\n    static items(data: any) {\n\n    }\n}`,
             dir: 'services',
             floder: false,
             extend: true
@@ -51,36 +46,32 @@ module.exports = {
             export: true,
             dir: 'modals',
             extend: true,
-            floder:true
+            floder: true
         },
         directive: {
             commonds: ['directive', 'd'],
-            templateString: `import { DirectiveOptions } from 'vue'
-            export const $moduleName$: DirectiveOptions = {
-              inserted(el, binding, vnode: any) {
-            
-              },
-              bind(el, binding, vnode: any) {
-                
-              }
-            }`,
+            templateString: `import { DirectiveOptions } from 'vue'\nexport const $moduleName$: DirectiveOptions = {\n    inserted(el, binding, vnode: any) {\n\n    },\n    bind(el, binding, vnode: any) {\n\n    }\n}`,
             dir: 'directives',
             floder: false,
             export: true,
             extend: true
         },
+        store: {
+            commonds: ['store'],
+            templateString: `import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'\nimport store from '@/store'\n\n@Module({ dynamic: true, store, name: '$fileName$' })\nclass $moduleName$ extends VuexModule {\n    state: 0 | 1 | 2 = 1;\n\n    @Mutation\n    private SET_STATE(val: any) {\n        this.state = val\n    }\n\n    @Action\n    changeState(val: any) {\n        this.SET_STATE(val)\n    }\n}\n\nexport const $moduleName$Module = getModule($moduleName$)`,
+            floder: false,
+            dir: 'store/modules',
+            extend: true
+        },
         class: {
             commonds: ['class', 'model'],
-            templateString: `export class $moduleName$ {
-                construct() { }
-            }`,
+            templateString: `export class $moduleName$ {\n    // name: string = ''\n    // construct(obj: any = {}) {\n    //     this.name = obj.name || ''\n    // }\n}`,
             dir: 'class',
             floder: false
         },
         interface: {
             commonds: ['interface', 'i'],
-            templateString: `export interface I$moduleName$ {
-            }`,
+            templateString: `export interface I$moduleName$ {\n    name: String;\n    type: number;\n}`,
             dir: 'class',
             floder: false
         }

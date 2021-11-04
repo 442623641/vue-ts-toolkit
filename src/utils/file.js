@@ -1,7 +1,7 @@
 const fs = require('fs');                           // 文件读取模块
 const path = require('path');                         // 路径模块const
 const shell = require('shelljs');
-const Log = require("./log");
+
 module.exports = {
     // 查看文件/文件夹是否存在
     checkFileIsExists(path) {
@@ -153,5 +153,15 @@ module.exports = {
         })
         let file = path.join(filePath, fileName);
         return fs.appendFileSync(file, text);
+    },
+    replaceTextSync(path, targets) {
+        let data = fs.readFileSync(path, 'utf8');
+     
+        targets.forEach(item => {
+            if (!data.includes(item[1])) {
+                data = data.replace(new RegExp(item[0], 'g'), item[1]);
+            }
+        })
+        fs.writeFileSync(path, data, 'utf8');
     }
 };

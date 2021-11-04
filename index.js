@@ -32,7 +32,7 @@ program
     name: '组件名称包含组件路径。在src下指定的目录，不指定时则在项目src/pages目录下创建页面或src/components目录下创建组件，或者执行命令目录路径下创建页面或组件。'
   })
   .option("-e,--export", "导出模块至index.ts")
-  .option("-r,--router", "是否导出路由，仅page时可用")
+  .option("-r,--router <router>", "是否导出路由，仅page时可用")
   .action((type, name, options) => generate(type, name, options));
 /* = main entrance
 -------------------------------------------------------------- */
