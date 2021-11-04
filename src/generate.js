@@ -55,7 +55,6 @@ async function generate(type, inputPath, options) {
     await Files.checkFileIsExists(filePath) || await Files.createDir(filePath);
   }
 
-  console.log(filePath)
   // 查看文件夹是否存在
   // let isExists = await Files.checkFileIsExists(filePath);
   // if (isExists) return Log.error(`${filePath} 已存在`);
@@ -102,10 +101,10 @@ async function generate(type, inputPath, options) {
 
 const routeExport = async function (fileName, route, filePath) {
   let camelfileName = Strings.toCamelCase(fileName), parentPath = fileName, routerStr = '', pageRouteFilePath = filePath, childrenPath = '';
+  let paths = filePath.split('/');
 
   switch ((route || 'root').toString().toLowerCase()) {
     case 'layout':
-      let paths = filePath.split('/');
       if (paths.length > 3) {
         parentPath = paths[paths.length - 2];
         camelfileName = Strings.toCamelCase(parentPath)
@@ -113,7 +112,7 @@ const routeExport = async function (fileName, route, filePath) {
         childrenPath = `${fileName}`;
       }
 
-      let pageRouteStr = `\n    {\n      path: '${childrenPath}',\n      component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),\n      name: '${fileName}-page',\n      meta: {\n        title: '${fileName}'\n      }\n    }\n  `
+      let pageRouteStr = `\n    {\n      path: '${childrenPath}',\n      component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/${paths.slice(1).join('/')}/${fileName}.page.vue'),\n      name: '${fileName}-page',\n      meta: {\n        title: '${fileName}'\n      }\n    }\n  `
       let routingFilePath = path.join(pageRouteFilePath, `${camelfileName}.routing.ts`)
 
       let isExist = await Files.checkFileIsExists(routingFilePath);
@@ -124,14 +123,14 @@ const routeExport = async function (fileName, route, filePath) {
       routerStr = `import { RouteConfig } from 'vue-router'\nimport Layout from '@/layout/index.vue'\n\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${parentPath}',\n  component: Layout,\n  redirect: '/${parentPath}/${childrenPath}',\n  meta: {\n    title: '${parentPath}',\n    icon: '${parentPath}'\n  },\n  children: [${pageRouteStr}]\n}`
       break;
     case 'root':
-      routerStr = `import { RouteConfig } from 'vue-router'\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${fileName}',\n  component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),\n  name: '${fileName}-page',\n  meta: {\n    title: '${fileName}',\n    icon: '${fileName}'\n  }\n}`
+      routerStr = `import { RouteConfig } from 'vue-router'\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${fileName}',\n  component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/${paths.slice(1).join('/')}/${fileName}.page.vue'),\n  name: '${fileName}-page',\n  meta: {\n    title: '${fileName}',\n    icon: '${fileName}'\n  }\n}`
       break;
     default:
       break;
   }
 
   let routeFileName = `${camelfileName}.routing.ts`;
-  console.log(pageRouteFilePath, routeFileName)
+
   Files.writeFileSync(pageRouteFilePath, routeFileName, routerStr);
   // 查看router/index.ts是否存在
   let routerIndexPath = path.join(Config.entry, `src`, 'router/index.ts')
