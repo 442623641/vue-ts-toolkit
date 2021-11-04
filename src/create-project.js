@@ -11,14 +11,14 @@ async function createProject(projectName) {
   // 查看文件夹是否存在
   let isExists = await Util.checkFileIsExists(page_root);
   if (isExists) {
-    Log.error(`当前目录已存在，请重新确认, path: ` + page_root);
+    Log.error(`project ${page_root} 目录已存在`);
     return;
   }
   // 创建文件夹
   await Util.createDir(page_root);
   // 复制文件
   Util.copyFolder(templateRoot, page_root, function () {
-    Log.success(`创建项目成功, path: ` + page_root + `\n cd ${projectName} \n npm install \n npm run serve`);
+    Log.success(`${page_root}项目创建成功\n cd ${projectName} \n npm install \n npm rebuild node-sass \n npm run serve`);
   })
 }
 

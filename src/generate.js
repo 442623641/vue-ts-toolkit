@@ -110,7 +110,7 @@ const routeExport = async function (fileName, route, filePath) {
         parentPath = paths[paths.length - 2];
         camelfileName = Strings.toCamelCase(parentPath)
         pageRouteFilePath = paths.slice(0, -1).join('/');
-        childrenPath = `/${fileName}`;
+        childrenPath = `${fileName}`;
       }
 
       let pageRouteStr = `\n    {\n      path: '${childrenPath}',\n      component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),\n      name: '${fileName}-page',\n      meta: {\n        title: '${fileName}'\n      }\n    }\n  `
@@ -121,7 +121,7 @@ const routeExport = async function (fileName, route, filePath) {
         Files.replaceTextSync(routingFilePath, [[`}\n  ]\n}`, `},${pageRouteStr}]\n}`]]);
         return
       }
-      routerStr = `import { RouteConfig } from 'vue-router'\nimport Layout from '@/layout/index.vue'\n\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${parentPath}',\n  component: Layout,\n  redirect: '/${parentPath}${childrenPath}',\n  meta: {\n    title: '${parentPath}',\n    icon: '${parentPath}'\n  },\n  children: [${pageRouteStr}]\n}`
+      routerStr = `import { RouteConfig } from 'vue-router'\nimport Layout from '@/layout/index.vue'\n\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${parentPath}',\n  component: Layout,\n  redirect: '/${parentPath}/${childrenPath}',\n  meta: {\n    title: '${parentPath}',\n    icon: '${parentPath}'\n  },\n  children: [${pageRouteStr}]\n}`
       break;
     case 'root':
       routerStr = `import { RouteConfig } from 'vue-router'\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${fileName}',\n  component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/pages/${fileName}/${fileName}.page.vue'),\n  name: '${fileName}-page',\n  meta: {\n    title: '${fileName}',\n    icon: '${fileName}'\n  }\n}`
