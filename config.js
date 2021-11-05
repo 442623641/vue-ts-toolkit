@@ -49,7 +49,7 @@ module.exports = {
             floder: true
         },
         directive: {
-            commonds: ['directive', 'd'],
+            commonds: ['directive', 'd','dir'],
             templateString: `import { DirectiveOptions } from 'vue'\nexport const $moduleName$: DirectiveOptions = {\n    inserted(el, binding, vnode: any) {\n\n    },\n    bind(el, binding, vnode: any) {\n\n    }\n}`,
             dir: 'directives',
             floder: false,
@@ -64,7 +64,7 @@ module.exports = {
             extend: true
         },
         class: {
-            commonds: ['class', 'model'],
+            commonds: ['class', 'model','cl'],
             templateString: `export class $moduleName$ {\n    // name: string = ''\n    // construct(obj: any = {}) {\n    //     this.name = obj.name || ''\n    // }\n}`,
             dir: 'class',
             floder: false
@@ -74,7 +74,12 @@ module.exports = {
             templateString: `export interface I$moduleName$ {\n    name: String;\n    type: number;\n}`,
             dir: 'class',
             floder: false
+        },
+        enum: {
+            commonds: ['enum', 'e'],
+            templateString: `export interface E$moduleName$ {\n}`,
+            dir: 'class',
+            floder: false
         }
-
     }
 };

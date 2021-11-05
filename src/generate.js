@@ -3,9 +3,10 @@ const Log = require("./utils/log");                       // 控制台输出
 const Files = require('./utils/file');                      // 工具函数
 const Strings = require('./utils/string');                      // 工具函数
 let Config = require('../config');                    // 获取配置项
-
+const Colors = require('./utils/colors');
 // Main
 module.exports = function (type, name, createDir) {
+
   generate(type, name, createDir);
 };
 
@@ -19,7 +20,7 @@ async function generate(type, inputPath, options) {
   }
   let moduli = Config.modules[type];
   if (!moduli) {
-    Log.info(`generate - Create ${Object.keys(Config.modules).join(',')}`);
+    Log.info(`generate - Create ${Colors.strong(`${Object.keys(Config.modules).join(',')}`)}`);
     return Log.error(`Generators are not supported in this project type ${type}.`);
   }
 
@@ -55,16 +56,10 @@ async function generate(type, inputPath, options) {
     await Files.checkFileIsExists(filePath) || await Files.createDir(filePath);
   }
 
-  // 查看文件夹是否存在
-  // let isExists = await Files.checkFileIsExists(filePath);
-  // if (isExists) return Log.error(`${filePath} 已存在`);
-  // 创建文件夹
-  // await Files.createDir(filePath);
-
   // 获取模板文件
   if (moduli.templateString) {
     Files.writeFileSync(filePath, `${extendFileName}.ts`, moduli.templateString, { type, moduleName: type == 'directive' ? fileName : Strings.toCamelCase(fileName), fileName })
-    Log.success(`创建成功：${filePath}/${extendFileName}.ts`);
+    Log.success(`创建成功：${Colors.input(`${filePath}/${extendFileName}.ts`)}`);
   } else {
     let templatePath = path.join(Config.template, '/' + moduli.templatePath);
     let files = await Files.readDir(templatePath);
@@ -79,7 +74,7 @@ async function generate(type, inputPath, options) {
     await Files.fileStrReplace(`${filePath}`, newfiles, { fileName, type, moduleName: Strings.toPascalCase(fileName) });
 
     // 成功提示
-    Log.success(`创建成功：${filePath}`);
+    Log.success(`创建成功：${Colors.input(`${filePath}`)}`);
     newfiles.forEach(v => {
       Log.success(v);
     })
@@ -122,6 +117,7 @@ const routeExport = async function (fileName, route, filePath) {
       }
       routerStr = `import { RouteConfig } from 'vue-router'\nimport Layout from '@/layout/index.vue'\n\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${parentPath}',\n  component: Layout,\n  redirect: '/${parentPath}/${childrenPath}',\n  meta: {\n    title: '${parentPath}',\n    icon: '${parentPath}'\n  },\n  children: [${pageRouteStr}]\n}`
       break;
+    case 'true':
     case 'root':
       routerStr = `import { RouteConfig } from 'vue-router'\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${fileName}',\n  component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/${paths.slice(1).join('/')}/${fileName}.page.vue'),\n  name: '${fileName}-page',\n  meta: {\n    title: '${fileName}',\n    icon: '${fileName}'\n  }\n}`
       break;

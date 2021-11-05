@@ -1,6 +1,6 @@
 {
   "name": "vue-ts-toolkit",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "bin": {
     "vtx": "./index.js"
   },
@@ -17,7 +17,6 @@
   },
   "deprecated": false,
   "description": "tmp",
-  "devDependencies": {},
   "directories": {
     "lib": "lib"
   },
