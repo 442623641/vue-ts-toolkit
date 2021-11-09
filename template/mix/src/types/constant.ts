@@ -1,5 +1,5 @@
 
-export const USER_ROLES = { 1: '学生处', 2: '辅导员', 3: '班主任', 4: '信息查看员', 5: '分院审核员', 6: '教务处', 8: '管理员' }
+export const USER_ROLES = { 1: '学生处', 2: '辅导员', 3: '班主任', 5: '教务处', 6: '查看员', 8: '管理员' }
 export const APP_NAME = 'vue-typescript-admin-template'
 
 // 网站默认设置
