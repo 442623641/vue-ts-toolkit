@@ -60,13 +60,13 @@ npm install -g vue-ts-toolkit
     </thead>
     <tr>
         <td>
-            <img src="https://gitee.com/dolphinor/vue-ts-toolkit/raw/main/template/demo/sidemenu.jpg">
+            <img src="./template/demo/sidemenu.jpg">
         </td>
         <td>
-            <img src="https://gitee.com/dolphinor/vue-ts-toolkit/raw/main/template/demo/tabs.jpg">
+            <img src="./template/demo/tabs.jpg">
         </td>
         <td>
-            <img src="https://gitee.com/dolphinor/vue-ts-toolkit/raw/main/template/demo/mix.jpg">
+            <img src="./template/demo/mix.jpg">
         </td>
     </tr>
 </table>
