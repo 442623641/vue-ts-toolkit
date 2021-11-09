@@ -102,6 +102,32 @@ npm install -g vue-ts-toolkit
 │
 │── icons                         # router          
 ```
+## template type
+
+<table>
+<thead>
+<th>
+sidemenu
+</th>
+<th>
+tabs
+</th>
+<th>
+mix
+</th>
+</thead>
+<tr>
+<td>
+<img src="./template/demo/sidemenu.jpg">
+</td>
+<td>
+<img src="./template/demo/tabs.jpg">
+</td>
+<td>
+<img src="./template/demo/mix.jpg">
+</td>
+</tr>
+</table>
 
 ---
 

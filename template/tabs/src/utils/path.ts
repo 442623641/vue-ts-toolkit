@@ -1,13 +1,13 @@
-export const resolve = function (...pathSegments) {
-    var resolvedPath = '',
+export const resolve = function (...pathSegments:string[]): string {
+    let resolvedPath = '',
         resolvedAbsolute = false;
 
-    for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-        var path = (i >= 0) ? arguments[i] : '/';//process.cwd();
-
+    for (let i = pathSegments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+        pathSegments[i] = pathSegments[i].length > 1 && pathSegments[i].endsWith('/') ? pathSegments[i].slice(0, -1) : pathSegments[i]
+        const path = i >= 0 ? pathSegments[i] : '/'
         // Skip empty and invalid entries
         if (typeof path !== 'string') {
-            throw new TypeError('Arguments to path.resolve must be strings');
+            throw new TypeError('pathSegments to path.resolve must be strings');
         } else if (!path) {
             continue;
         }
@@ -29,17 +29,17 @@ export const resolve = function (...pathSegments) {
 
 function filter(xs, f) {
     if (xs.filter) return xs.filter(f);
-    var res = [];
-    for (var i = 0; i < xs.length; i++) {
+    const res = [];
+    for (let i = 0; i < xs.length; i++) {
         if (f(xs[i], i, xs)) res.push(xs[i]);
     }
     return res;
 }
 function normalizeArray(parts, allowAboveRoot) {
     // if the path tries to go above the root, `up` ends up > 0
-    var up = 0;
-    for (var i = parts.length - 1; i >= 0; i--) {
-        var last = parts[i];
+    let up = 0;
+    for (let i = parts.length - 1; i >= 0; i--) {
+        const last = parts[i];
         if (last === '.') {
             parts.splice(i, 1);
         } else if (last === '..') {
