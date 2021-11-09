@@ -45,7 +45,6 @@ npm install -g vue-ts-toolkit
     $ vtx generate/g class user
 
 ## template type
-
 <table>
     <thead>
         <th>
@@ -60,7 +59,7 @@ npm install -g vue-ts-toolkit
     </thead>
     <tr>
         <td>
-            ![Fileter_transaction](./template/demo/sidemenu.jpg)
+            <img src="./template/demo/sidemenu.jpg">
         </td>
         <td>
             <img src="./template/demo/tabs.jpg">
@@ -72,7 +71,6 @@ npm install -g vue-ts-toolkit
 </table>
 
 ## Module Structure
-
 ```bash
 ├── class                               # class files
 │   │── classa.ts                       # class a with typescript
