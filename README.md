@@ -26,6 +26,7 @@ npm install -g vue-ts-toolkit
     type ................. The type of feature (e.g. page, component, directive, service)
     name ................. The name/path of the feature being generated
 
+
 ### Examples:
     $ vtx -h 
     $ vtx g -h 
@@ -42,6 +43,33 @@ npm install -g vue-ts-toolkit
     $ vtx generate store user
     $ vtx generate/g interface user
     $ vtx generate/g class user
+
+## template type
+
+<table>
+    <thead>
+        <th>
+            sidemenu
+        </th>
+        <th>
+            tabs
+        </th>
+        <th>
+            mix
+        </th>
+    </thead>
+    <tr>
+        <td>
+            <img src="https://gitee.com/dolphinor/vue-ts-toolkit/raw/main/template/demo/sidemenu.jpg">
+        </td>
+        <td>
+            <img src="https://gitee.com/dolphinor/vue-ts-toolkit/raw/main/template/demo/tabs.jpg">
+        </td>
+        <td>
+            <img src="https://gitee.com/dolphinor/vue-ts-toolkit/raw/main/template/demo/mix.jpg">
+        </td>
+    </tr>
+</table>
 
 ## Module Structure
 
@@ -102,32 +130,6 @@ npm install -g vue-ts-toolkit
 │
 │── icons                         # router          
 ```
-## template type
-
-<table>
-<thead>
-<th>
-sidemenu
-</th>
-<th>
-tabs
-</th>
-<th>
-mix
-</th>
-</thead>
-<tr>
-<td>
-<img src="./template/demo/sidemenu.jpg">
-</td>
-<td>
-<img src="./template/demo/tabs.jpg">
-</td>
-<td>
-<img src="./template/demo/mix.jpg">
-</td>
-</tr>
-</table>
 
 ---
 
