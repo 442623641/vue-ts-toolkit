@@ -1,6 +1,7 @@
-# Vue Typescript Toolkit
+# Vue Typescript Toolkit 
 
-Provides built-in TypeScript tooling support,The Vue Typescript command line interface (CLI) is your go-to tool for developing [vue2-typescript][vue2-typescript] apps.
+Provides  built-in TypeScript tooling support,The Vue Typescript command line interface (CLI) is your go-to tool for developing [vue2-typescript][vue2-typescript] apps.
+[gitee][gitee link]    [github][github link]
 
     vtx create - Create vue project template with typescript 
     vtx generate - Create Pages, Components,Services,Modals & vue Features
@@ -8,6 +9,7 @@ Provides built-in TypeScript tooling support,The Vue Typescript command line int
 Automatically create framework features with vtx Generate. This command uses the commander CLI to generate features such as pages, components, directives, services, modals and more.
 
 You can specify a path to nest your feature within any number of subdirectories. For example, specify a name of "pages/New Page" to generate page files at src/app/pages/new-page/.
+
 
 
 ### Installation
@@ -132,3 +134,5 @@ npm install -g vue-ts-toolkit
 ---
 
 [vue2-typescript]: https://cn.vuejs.org/v2/guide/typescript.html
+[gitee link]: https://gitee.com/dolphinor/vue-ts-toolkit
+[github link]: https://github.com/442623641/vue-ts-toolkit
