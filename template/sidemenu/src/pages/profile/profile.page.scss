@@ -1,0 +1,16 @@
+.profile-page {
+    padding: 50px 70px 70px;
+    font-size: 15px;
+
+    .el-row--flex {
+        color: #222;
+        align-items: center;
+        display: flex;
+        padding: 14px 16px;
+        border-bottom: 0.55px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .el-col:first-child {
+        color: #555;
+    }
+}

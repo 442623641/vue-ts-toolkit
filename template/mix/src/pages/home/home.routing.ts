@@ -1,0 +1,47 @@
+// Created by ZhangLeo on 2021-11-03
+
+import { RouteConfig } from 'vue-router'
+import Layout from '@/layout/index.vue'
+
+export const homeRouting: RouteConfig = {
+  path: '/home',
+  component: Layout,
+  redirect: '/home/home-a',
+  meta: {
+    title: 'home',
+    icon: 'home'
+  },
+  children: [
+    {
+      path: 'home-a',
+      component: () => import(/* webpackChunkName: "home-b-page" */ '@/pages/home/home-a/home-a.page.vue'),
+      name: 'home-a-page',
+      meta: {
+        title: 'home-a',
+        affix: true,
+        icon: 'home-a'
+      }
+    },
+    {
+      path: 'home-b',
+      component: () => import(/* webpackChunkName: "home-b-page" */ '@/pages/home/home-b/home-b.page.vue'),
+      name: 'home-b-page',
+      meta: {
+        title: 'home-b',
+        noCache: true,
+        roles: ['admin'],
+        icon: 'home-b'
+      }
+    },
+    {
+      path: 'home-c',
+      component: () => import(/* webpackChunkName: "home-b-page" */ '@/pages/home/home-c/home-c.page.vue'),
+      name: 'home-c-page',
+      meta: {
+        title: 'home-c',
+        roles: ['viewer'],
+        icon: 'home-c'
+      }
+    }
+  ]
+}

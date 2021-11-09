@@ -6,7 +6,6 @@ let Config = require('../config');                    // 获取配置项
 const Colors = require('./utils/colors');
 // Main
 module.exports = function (type, name, createDir) {
-
   generate(type, name, createDir);
 };
 
@@ -106,11 +105,10 @@ const routeExport = async function (fileName, route, filePath) {
         pageRouteFilePath = paths.slice(0, -1).join('/');
         childrenPath = `${fileName}`;
       }
-
       let pageRouteStr = `\n    {\n      path: '${childrenPath}',\n      component: () => import(/* webpackChunkName: "${fileName}-page" */ '@/${paths.slice(1).join('/')}/${fileName}.page.vue'),\n      name: '${fileName}-page',\n      meta: {\n        title: '${fileName}'\n      }\n    }\n  `
       let routingFilePath = path.join(pageRouteFilePath, `${camelfileName}.routing.ts`)
 
-      let isExist = await Files.checkFileIsExists(routingFilePath);
+      isExist = await Files.checkFileIsExists(routingFilePath);
       if (isExist) {
         Files.replaceTextSync(routingFilePath, [[`}\n  ]\n}`, `},${pageRouteStr}]\n}`]]);
         return

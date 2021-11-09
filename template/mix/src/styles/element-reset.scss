@@ -1,0 +1,333 @@
+body {
+  font-size: 14px;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  background-color: #fff;
+  font-feature-settings: "tnum", "tnum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.el-button:not(.el-button--text):not(.is-plain) {
+  &[outline] {
+    background: transparent;
+  }
+
+  &.el-button--primary,
+  &.el-button--success,
+  &.el-button--info,
+  &.el-button--warning,
+  &.el-button--danger {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .05);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .05);
+  }
+
+  &[gradient] {
+    &:not([no-shadow]) {
+      box-shadow: 0 0.4rem 0.8rem #aac9ff;
+    }
+
+    background: linear-gradient(-90deg, #2F73F6, #06A8FE);
+  }
+}
+
+.el-tooltip__popper {
+  max-width: 500px;
+}
+
+.el-timeline-item__node {
+  border: 4px solid #06A8FE;
+}
+
+.el-descriptions-item__container {
+  align-items: center;
+}
+
+.el-dialog {
+  &::after {
+    content: '';
+    display: block;
+    height: 1px;
+  }
+
+  .el-dialog__title {
+    display: inline-block;
+    min-height: 22px;
+  }
+}
+
+.el-message-box__wrapper .el-message-box {
+  padding: 20px;
+
+  .el-message-box__title {
+    font-weight: 500;
+  }
+
+  .el-message-box__status {
+    display: none;
+  }
+
+  .el-message-box__message {
+    padding: 10px 0;
+  }
+
+  .el-message-box__content {
+    font-size: 15px;
+    color: #555;
+  }
+}
+
+.el-alert {
+  &[full] {
+    .el-alert__content {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &.el-alert--primary {
+    background-color: #e8f4ff;
+    border: 1px solid var(--theme-color);
+
+    .el-alert__description {
+      color: #909399;
+    }
+  }
+}
+
+.el-card {
+  transition: all .3s cubic-bezier(.645, .045, .355, 1);
+
+  &.is-always-shadow {
+    border: none;
+  }
+}
+
+.el-radio-group[plain] .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+  color: var(--theme-color);
+  background-color: var(--theme-color-tint);
+  border-color: var(--theme-color);
+  box-shadow: -1px 0 0 0 var(--theme-color);
+}
+
+.el-form--label-top {
+  .el-form-item {
+    margin-bottom: 14px;
+  }
+
+  .el-form-item__label {
+    // line-height: 30px;
+    padding: 0;
+  }
+}
+
+.el-form[fit] .el-form-item__content>* {
+  width: 100%;
+}
+
+.el-date-editor--daterange.el-input__inner {
+  width: 310px;
+}
+
+.el-form--inline .el-form-item:last-child {
+  margin-right: 0;
+}
+
+.el-input-group--append .el-input-group__append .el-button {
+  // color: #FFFFFF;
+  // background-color: var(--theme-color);
+  color: var(--theme-color);
+  background: #e8f4ff;
+  background: var(--theme-color-tint);
+  // border-color: #a3d3ff;
+  box-shadow: none !important;
+  opacity: 1;
+  transition: opacity .2s;
+
+  &:hover {
+    opacity: .7;
+  }
+}
+
+.el-table {
+  &[editable] {
+    input {
+      margin: 0;
+      font-variant: tabular-nums;
+      list-style: none;
+      -webkit-font-feature-settings: "tnum";
+      font-feature-settings: "tnum";
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      min-width: 0;
+      padding: 4px 11px;
+      font-size: 14px;
+      line-height: 1.5715;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      transition: box-shadow .3s;
+
+      &:focus {
+        border-color: #40a9ff;
+        border-right-width: 1px !important;
+        outline: 0;
+        -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
+      }
+    }
+  }
+
+  thead {
+    color: $text;
+  }
+
+  th {
+    background: rgb(250, 250, 250);
+  }
+
+  &[header-light] {
+    th {
+      background-color: #fafafa;
+      border-bottom: 1px solid #f0f0f0;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 1px;
+        height: 1.6em;
+        background-color: rgba(0, 0, 0, .06);
+        transform: translateY(-50%);
+        transition: background-color .3s;
+        content: "";
+      }
+    }
+
+  }
+
+  .el-table__empty-block {
+    display: block;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 50px;
+      background: url(../assets/imgs/null.svg) no-repeat center center;
+      background-size: contain;
+      position: relative;
+      top: 16px;
+      margin-top: 10px;
+    }
+  }
+
+  .cell {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.el-date-editor .el-range-separator {
+  color: rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
+
+
+$--color-primary: var(--theme-color);
+$--color-success: #13ce66;
+$--color-warning: #ffba00;
+$--color-danger: #ff4949;
+$--color-info: #5d5d5d;
+
+[status-dot] {
+  &::before {
+    color: $--color-primary;
+    content: '';
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: currentColor;
+  }
+
+  &::after {
+    content: attr(status-dot);
+    color: $text;
+  }
+
+}
+
+[status-dot*='成功'],
+[status-dot='success'],
+[status-dot*='通过'],
+[status-dot*='正常'],
+[status-dot*='已'] {
+  &::before {
+    color: $--color-success;
+  }
+
+}
+
+[status-dot*='失败'],
+[status-dot*='未'],
+[status-dot*='停用'],
+[status-dot*='error'] {
+  &::before {
+    color: $--color-danger;
+  }
+
+}
+
+
+
+[color='primary'],
+[color*='待'],
+.color-primary {
+  color: $--color-primary;
+}
+
+
+[color='success'],
+[color*='成功'],
+[color*='上架'],
+[color*='启用'],
+[color*='通过'],
+.color-success {
+  color: $--color-success;
+}
+
+[color='warning'],
+[color*='失败'],
+[color*='下架'],
+[color*='未'],
+[color*='停用'],
+.color-warning {
+  color: $--color-warning;
+}
+
+[color='danger'],
+[color*='未通过'],
+[color='error'],
+.color-danger {
+  color: $--color-danger;
+}
+
+[color='info'],
+.color-info {
+  color: $--color-info;
+}
+
+[color='note'],
+.color-note {
+  color: #999;
+}

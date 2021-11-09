@@ -36,11 +36,12 @@ ${Colors.strong(`Examples call:`)}
 -------------------------------------------------------------- */
 // 创建项目
 program
-  .command("create <project-name>")
+  .command("create <project-name> [template-type]")
   .description("Create a new Vue project with Typescript", {
-    name: 'The name of your new project (e.g. myApp, "My App")'
+    name: 'The name of your new project (e.g. myApp, "My App")',
+    type: `The template type of your new project  (tabs,sidemenu,mix)`
   })
-  .action((name, options) => createProject(name));
+  .action((name, type, options) => createProject(name, type));
 
 // 快速生成模版 页面/组件
 program

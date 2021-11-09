@@ -1,0 +1,52 @@
+<div class="login-page">
+    <div class="overlay"></div>
+    <div class="background">
+        <canvas id="hero-canvas" width="1920" height="1080"></canvas>
+    </div>
+    <div class="main">
+        <div class="container a-container">
+            <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="form">
+                <h2 class="form_title title">vue-typescript</h2>
+                <el-form-item prop="username" margin-top-20>
+                    <span class="svg-container">
+                        <svg-icon name="user" />
+                    </span>
+                    <el-input ref="username" v-model="loginForm.username" placeholder="输入登录账户" maxlength="11"
+                        name="username" type="tel" tabindex="1" />
+                </el-form-item>
+                <el-form-item prop="password" margin-top-10>
+                    <span class="svg-container">
+                        <svg-icon name="password" />
+                    </span>
+                    <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType"
+                        placeholder="输入登录密码" name="password" tabindex="2" @keyup.enter.native="handleLogin" />
+                    <span class="show-pwd" @click="showPwd">
+                        <svg-icon :name="passwordType === 'password' ? 'eye-off' : 'eye-on'" />
+                    </span>
+                </el-form-item>
+                <p style="width: 100%; color: #999; margin-top: -5px; font-size: 12px" text-left>
+                    <el-tooltip placement="top">
+                        <div slot="content">
+                            初始密码为账号后六位，<br />可以联系管理员重置密码
+                        </div>
+                        <span>忘记密码？</span>
+                    </el-tooltip>
+                </p>
+                <el-button gradient :loading="loading" type="primary" style="width: 100%" round
+                    @click.native.prevent="handleLogin(2)">
+                    登 录
+                </el-button>
+            </el-form>
+        </div>
+        <div class="switch">
+            <div class="switch__circle"></div>
+            <div class="switch__circle switch__circle--t"></div>
+            <div class="switch__container">
+                <h2 class="switch__title title">欢迎回来！</h2>
+                <p class="switch__description description">
+                    {{appName}}，让学生资助工作更精准、更便捷、更智慧
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

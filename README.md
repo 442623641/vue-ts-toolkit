@@ -12,9 +12,9 @@ You can specify a path to nest your feature within any number of subdirectories.
 
 ### Installation
 
-    ```
-    npm install -g vue-ts-toolkit
-    ```
+```
+npm install -g vue-ts-toolkit
+```
 
 ### Usage:
     $ vtx create <project-name>
@@ -30,13 +30,14 @@ You can specify a path to nest your feature within any number of subdirectories.
     $ vtx -h 
     $ vtx g -h 
     $ vtx create myApp 
+    $ vtx create myApp sidemenu|tabs|mix
     $ vtx generate page about
-    $ vtx generate page contact --router=root
+    $ vtx generate page contact --router=root|layout
     $ vtx generate page pages/home/home-a --router=layout
     $ vtx generate component contact/form
     $ vtx generate directive ripple --export
     $ vtx generate directive ripple -e
-    $ vtx generate service api/user
+    $ vtx generate service user
     $ vtx generate modal user
     $ vtx generate store user
     $ vtx generate/g interface user

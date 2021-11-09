@@ -1,0 +1,36 @@
+.collapse {
+  overflow: hidden;
+
+  &.expand .el-icon-arrow-up {
+    transform: rotate(0deg) !important;
+  }
+}
+
+.collapse-title {
+  flex-wrap: nowrap;
+  display: flex;
+
+  &>*:first-child {
+    flex: 1;
+  }
+
+  .collapse-button {
+    margin-bottom: 22px;
+
+    .el-icon-arrow-up {
+      transform: rotate(180deg);
+      transition: transform .24s;
+    }
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: height .2s;
+  will-change: height;
+}
+
+.fade-enter,
+.fade-leave-to {
+  height: 0px !important;
+}

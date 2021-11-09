@@ -1,0 +1,57 @@
+<div class="users-page page-container">
+    <el-form :inline="true" :model="query" flex-between>
+        <div>
+            <el-form-item>
+                <el-radio-group v-model="query.status" @change="patch(1)" plain>
+                    <el-radio-button>全部</el-radio-button>
+                    <el-radio-button :label="key" v-for="(value, key) in states" :key="value">{{ value }}
+                    </el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item>
+                <el-select v-model="query.role" @change="patch(1)">
+                    <el-option label="全部角色" value=""></el-option>
+                    <el-option :label="value" :value="key" v-for="(value, key) in roles" :key="key"></el-option>
+                </el-select>
+            </el-form-item>
+        </div>
+        <div>
+            <el-form-item>
+                <el-input clearable @change="patch(1)" placeholder="手机号码/姓名" v-model="query.keyword">
+                </el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" plain @click="patch(1)">查询</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="modify" icon="el-icon-circle-plus-outline">添加用户</el-button>
+            </el-form-item>
+        </div>
+    </el-form>
+    <el-table :data="items" fit border ref="table">
+        <el-table-column prop="name" label="姓名" width="100"></el-table-column>
+        <el-table-column prop="phone" label="手机号" width="120">
+        </el-table-column>
+        <el-table-column prop="roleName" label="角色" width="100"></el-table-column>
+        <el-table-column label="数据权限" prop="power" show-overflow-tooltip=""></el-table-column>
+        <el-table-column label="状态" width="100">
+            <template slot-scope="{ row }">
+                <span :status-dot="row.enable ? '正常' : '停用'"></span>
+            </template>
+        </el-table-column>
+        <el-table-column label="创建时间" prop="createTime" width="160"><template slot-scope="{ row }">{{
+          row.createTime | formatDate("yyyy-MM-dd hh:mm")
+        }}</template></el-table-column>
+        <el-table-column label="操作" fixed="right" width="180">
+            <template slot-scope="{ row }" v-if="role == 8 || row.role != 8">
+                <el-button margin-right-10 size="small" @click="resetPassword(row)" type="text">重置密码</el-button>
+                <el-button size="small" type="text" margin-right-10 @click="modify(row)">编辑</el-button>
+                <el-button size="small" type="text" @click="stateToggle(row)"><span :color="row.enable ? 'danger' : ''">{{
+              row.enable ? "停用" : "启用"
+            }}</span>
+                </el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <pagination @pagination="patch()" :total="total" :page.sync="query.pageIndex" :limit.sync="query.pageSize" />
+</div>

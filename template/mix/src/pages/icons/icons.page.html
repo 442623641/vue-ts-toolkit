@@ -1,0 +1,45 @@
+<div class="icons-page page-container">
+
+    <el-tabs>
+        <el-tab-pane label="Svg Icons">
+            <div>
+                <el-link margin-right-10 type='primary'
+                    href="https://mmf-fe.github.io/svgicon/guide/#%E4%BD%BF%E7%94%A8" target="_blank">Add and use
+                </el-link>|
+                <el-link margin-left-10 type='primary' href="https://www.iconfont.cn/collections?personal=1&sort=visit"
+                    target="_blank">Get more svg
+                    icon
+                </el-link>
+            </div>
+            <div class="grid">
+                <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateSvgIconCode(item), $event)">
+                    <el-tooltip placement="top">
+                        <div slot="content">
+                            {{ generateSvgIconCode(item) }}
+                        </div>
+                        <div class="icon-item">
+                            <svg-icon :name="item" class="disabled" />
+                            <span>{{ item }}</span>
+                        </div>
+                    </el-tooltip>
+                </div>
+            </div>
+        </el-tab-pane>
+        <el-tab-pane label="Element-UI Icons">
+            <div class="grid">
+                <div v-for="item of elementIcons" :key="item"
+                    @click="handleClipboard(generateElementIconCode(item), $event)">
+                    <el-tooltip placement="top">
+                        <div slot="content">
+                            {{ generateElementIconCode(item) }}
+                        </div>
+                        <div class="icon-item">
+                            <i :class="'el-icon-' + item" />
+                            <span>{{ item }}</span>
+                        </div>
+                    </el-tooltip>
+                </div>
+            </div>
+        </el-tab-pane>
+    </el-tabs>
+</div>

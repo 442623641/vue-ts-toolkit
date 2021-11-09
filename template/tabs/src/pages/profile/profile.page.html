@@ -1,0 +1,42 @@
+<div class="profile-page page-container">
+    <el-row type="flex">
+        <el-col>姓名</el-col>
+        <el-col>{{ userInfo.name }}</el-col>
+        <el-col>
+            <el-button type="text" @click="open()">修改姓名</el-button>
+        </el-col>
+    </el-row>
+    <el-row type="flex">
+        <el-col>手机号码</el-col>
+        <el-col>{{ userInfo.phone }}</el-col>
+        <el-col> </el-col>
+    </el-row>
+    <el-row type="flex" v-if="userInfo.collegeName">
+        <el-col>所在院系</el-col>
+        <el-col>{{ userInfo.collegeName }}</el-col>
+        <el-col></el-col>
+    </el-row>
+    <el-row type="flex" v-if="userInfo.facultyName">
+        <el-col>所在专业</el-col>
+        <el-col>{{ userInfo.facultyName }}</el-col>
+        <el-col></el-col>
+    </el-row>
+    <el-row type="flex" v-if="userInfo.className">
+        <el-col>所在班级</el-col>
+        <el-col>{{ userInfo.className }}</el-col>
+        <el-col></el-col>
+    </el-row>
+    <el-row type="flex">
+        <el-col>角色</el-col>
+        <el-col>{{ userInfo.role }}</el-col>
+        <el-col></el-col>
+    </el-row>
+    <el-row type="flex">
+        <el-col>密码</el-col>
+        <el-col>*******</el-col>
+        <el-col>
+            <el-button @click="modify" type="text">修改密码</el-button>
+            <!-- <el-button type="text" @click="open('password', 6)">修改密码</el-button> -->
+        </el-col>
+    </el-row>
+</div>
