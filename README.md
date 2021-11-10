@@ -49,46 +49,22 @@ npm install -g vue-ts-toolkit
     $ vtx generate/g interface user
     $ vtx generate/g class user
 
-### template type
+## template type
 
-## sidemenu
+#### sidemenu
 <p align="center">
   <img width="600" src="./template/demo/sidemenu.jpg">
 </p>
 
-## tabs
+#### tabs
 <p align="center">
   <img width="600" src="./template/demo/tabs.jpg">
 </p>
 
-## mixins
+#### mixins
 <p align="center">
   <img width="600" src="./template/demo/mixins.jpg">
 </p>
-<!-- <table>
-    <thead>
-        <th>
-            sidemenu
-        </th>
-        <th>
-            tabs
-        </th>
-        <th>
-            mixins
-        </th>
-    </thead>
-    <tr>
-        <td>
-            <img src="./template/demo/sidemenu.jpg">
-        </td>
-        <td>
-            <img src="./template/demo/tabs.jpg">
-        </td>
-        <td>
-            <img src="./template/demo/mixins.jpg">
-        </td>
-    </tr>
-</table> -->
 
 ### Module Structure
 ```bash
