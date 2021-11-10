@@ -5,7 +5,7 @@ const version = require('./package').version;                 // 版本号
 const program = require('commander');                         // 命令行解析
 /* = task events
 -------------------------------------------------------------- */
-const createProject = require('./src/create-project'); // 创建项目
+const createProject = require('./src/create'); // 创建项目
 const generate = require('./src/generate'); // 创建
 const config = require('./config'); // 创建
 const Colors = require('./src/utils/colors');
@@ -39,7 +39,7 @@ program
   .command("create <project-name> [template-type]")
   .description("Create a new Vue project with Typescript", {
     name: 'The name of your new project (e.g. myApp, "My App")',
-    type: `The template type of your new project  (tabs,sidemenu,mix)`
+    type: `The template type of your new project  (tabs,sidemenu,mixins)`
   })
   .action((name, type, options) => createProject(name, type));
 

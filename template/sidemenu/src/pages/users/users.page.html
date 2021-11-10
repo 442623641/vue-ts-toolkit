@@ -39,10 +39,10 @@
                 <span :status-dot="row.enable ? '正常' : '停用'"></span>
             </template>
         </el-table-column>
-        <el-table-column label="创建时间" prop="createTime" width="160"><template slot-scope="{ row }">{{
+        <el-table-column label="创建时间" prop="createTime"><template slot-scope="{ row }">{{
           row.createTime | formatDate("yyyy-MM-dd hh:mm")
         }}</template></el-table-column>
-        <el-table-column label="操作" fixed="right" width="180">
+        <el-table-column label="操作" fixed="right">
             <template slot-scope="{ row }">
                 <el-button size="small" type="text" margin-right-10 @click="modify(row)">编辑</el-button>
                 <el-button size="small" type="text" @click="stateToggle(row)"><span :color="row.enable ? 'danger' : ''">{{

@@ -1,8 +1,17 @@
 <template>
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <router-link key="expand" class="sidebar-logo-link" to="">
-      <img src="@/assets/imgs/logo-white-full.png" class="sidebar-logo" />
-      <img src="@/assets/imgs/logo-white.png" class="sidebar-logo" />
+      <img src="favicon.ico" class="sidebar-logo" />
+      <i
+        style="
+          font-size: 16px;
+          font-weight: bolder;
+          color: #fff;
+          white-space: nowrap;
+          margin-left: 5px;
+        "
+        >Typescript Memu</i
+      >
     </router-link>
   </div>
 </template>
@@ -40,31 +49,16 @@ export default class extends Vue {
   & .sidebar-logo-link {
     display: flex;
     align-items: center;
-    min-height: 32px;
+    min-height: 30px;
     & .sidebar-logo {
-      // width: 26px;
       height: 27px;
-
       vertical-align: middle;
-      &:first-child {
-        display: block;
-        // width: 110px;
-      }
-      &:last-child {
-        display: none;
-      }
     }
   }
 
   &.collapse {
-    .sidebar-logo {
-      width: auto;
-      &:first-child {
-        display: none;
-      }
-      &:last-child {
-        display: block;
-      }
+    i {
+      display: none;
     }
   }
 }

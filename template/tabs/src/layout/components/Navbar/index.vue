@@ -1,11 +1,10 @@
 <template>
   <div class="navbar">
     <div class="sidebar-logo-container" v-if="showLogo">
-      <img
-        style="height: 32px"
-        src="@/assets/imgs/logo-blue-full.png"
-        class="sidebar-logo"
-      />
+      <img style="height: 30px" src="favicon.ico" class="sidebar-logo" />
+      <i style="font-size: 16px; font-weight: bolder; margin-left: 5px"
+        >Typescript Tabs</i
+      >
     </div>
     <HeadNavbar />
 

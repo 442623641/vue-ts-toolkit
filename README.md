@@ -56,7 +56,7 @@ npm install -g vue-ts-toolkit
             tabs
         </th>
         <th>
-            mix
+            mixins
         </th>
     </thead>
     <tr>
@@ -67,7 +67,7 @@ npm install -g vue-ts-toolkit
             <img src="./template/demo/tabs.jpg">
         </td>
         <td>
-            <img src="./template/demo/mix.jpg">
+            <img src="./template/demo/mixins.jpg">
         </td>
     </tr>
 </table>

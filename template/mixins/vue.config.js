@@ -1,5 +1,5 @@
 const path = require('path')
-const name = 'Vue Typescript Admin of MIX'
+const name = 'Vue Typescript Admin of Mixins'
 
 module.exports = {
     // TODO: Remember to change publicPath to fit your need

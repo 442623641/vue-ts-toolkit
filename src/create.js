@@ -60,9 +60,9 @@ module.exports = async function (name, template) {
   const choices = [
     `${Colors.input(`sidemenu`)}  | A creating project with a side menu with navigation in the content area`,
     `${Colors.input(`tabs`)}      | A creating project with a simple with navigation in the top navbar`,
-    `${Colors.input(`mix`)}       | A creating project with both side menu and top navbar with navigation`
+    `${Colors.input(`mixins`)}    | A creating project with both side menu and top navbar with navigation`
   ]
-  const templates = ['sidemenu', 'tabs', 'mix'];
+  const templates = ['sidemenu', 'tabs', 'mixins'];
   if (!templates.includes(template)) {
     const Prompt = require("inquirer");
     const initQuestions = [{
