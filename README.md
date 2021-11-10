@@ -2,7 +2,7 @@
 
 [Gitee][gitee link]  |  [Github][github link]
 
-从构建到开发，帮助 Vue 开发者快速使用typescript，提升项目构建与开发能力，基于 Element UI。
+从构建到开发，帮助开发者快速使用 Typescript 开发 Vue 项目，提升项目构建与开发能力，基于 Element UI。
 
 Provides  built-in TypeScript tooling support,The Vue Typescript command line interface (CLI) is your go-to tool for developing [vue2-typescript][vue2-typescript] apps.
 
