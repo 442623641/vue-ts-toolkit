@@ -1,7 +1,10 @@
 # Vue Typescript Toolkit 
 
+[Gitee][gitee link]  |  [Github][github link]
+
+从构建到开发，帮助 Vue 开发者快速使用typescript，提升项目构建与开发能力，基于 Element UI。
+
 Provides  built-in TypeScript tooling support,The Vue Typescript command line interface (CLI) is your go-to tool for developing [vue2-typescript][vue2-typescript] apps.
-[gitee][gitee link]  |  [github][github link]
 
     vtx create - Create vue project template with typescript 
     vtx generate - Create Pages, Components,Services,Modals & vue Features
@@ -46,8 +49,23 @@ npm install -g vue-ts-toolkit
     $ vtx generate/g interface user
     $ vtx generate/g class user
 
-## template type
-<table>
+### template type
+
+## sidemenu
+<p align="center">
+  <img width="600" src="./template/demo/sidemenu.jpg">
+</p>
+
+## tabs
+<p align="center">
+  <img width="600" src="./template/demo/tabs.jpg">
+</p>
+
+## mixins
+<p align="center">
+  <img width="600" src="./template/demo/mixins.jpg">
+</p>
+<!-- <table>
     <thead>
         <th>
             sidemenu
@@ -70,9 +88,9 @@ npm install -g vue-ts-toolkit
             <img src="./template/demo/mixins.jpg">
         </td>
     </tr>
-</table>
+</table> -->
 
-## Module Structure
+### Module Structure
 ```bash
 ├── class                               # class files
 │   │── classa.ts                       # class a with typescript
