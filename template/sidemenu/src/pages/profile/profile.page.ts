@@ -12,7 +12,7 @@ import { ModalPassword } from "@/modals";
 export default class extends Vue {
   userInfo = UserModule.userInfo;
   mounted() {
-    console.log('Hellow,I\'m page profile');
+    console.log('Hello,I\'m page profile');
   }
 
   open() {

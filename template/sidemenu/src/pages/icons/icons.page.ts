@@ -10,7 +10,7 @@ export default class extends Vue {
   svgIcons = this.getSvgIcons();
   elementIcons = elementIcons;
   mounted() {
-    console.log('Hellow,I\'m page icons');
+    console.log('Hello,I\'m page icons');
   }
 
   generateElementIconCode(symbol: string) {
