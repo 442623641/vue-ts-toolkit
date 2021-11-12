@@ -65,7 +65,9 @@ async function generate(type, inputPath, options) {
   // 获取模板文件
   const tmpOpt = { type, PascalCaseModuleName: Strings.toPascalCase(fileName), camelCaseModuleName: Strings.toCamelCase(fileName), fileName }
   if (moduli.templateString) {
+    Log.success(`${Colors.success(`CREATE`)} ${Colors.input(`${filePath}/${extendFileName}.ts`)}`);
     Files.writeFileSync(filePath, `${extendFileName}.ts`, moduli.templateString, tmpOpt)
+    
     Log.success(`[${Colors.success(`OK`)}] Generated ${Colors.input(`${type}`)} ${Colors.input(`${filePath}/${extendFileName}.ts`)}`);
   } else {
     let templatePath = path.join(Config.template, '/' + moduli.templatePath);
