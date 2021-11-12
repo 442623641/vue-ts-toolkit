@@ -1,7 +1,7 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
 import store from '@/store'
 import elementVariables from '@/styles/element-variables.scss'
-import { SETTINGS } from '@/types/constant'
+import { SETTINGS } from '@/class/constant'
 import { updateColor } from '@/utils/updateColor';
 const initColor = (key = 'theme') => {
   let color = localStorage.getItem(`static_settings_${key}`);

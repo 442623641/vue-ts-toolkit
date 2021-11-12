@@ -40,7 +40,7 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { SettingsModule } from "@/store/modules/settings.store";
 import { updateColor } from "@/utils/updateColor";
-import { THEME_COLORS } from "@/types/constant";
+import { THEME_COLORS } from "@/class/constant";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require("element-ui/package.json").version; // element-ui version from node_modules

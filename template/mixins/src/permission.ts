@@ -5,7 +5,7 @@ import { Route } from 'vue-router'
 import { UserModule } from '@/store/modules/user.store'
 import { PermissionModule } from '@/store/modules/permission.store'
 import { Toast } from './utils/toast'
-import { APP_NAME } from './types/constant'
+import { APP_NAME } from './class/constant'
 
 NProgress.configure({ showSpinner: false })
 

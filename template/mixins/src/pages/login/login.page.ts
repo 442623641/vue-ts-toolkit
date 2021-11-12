@@ -4,7 +4,7 @@ import { Route } from 'vue-router'
 import { Dictionary } from 'vue-router/types/router'
 import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user.store'
-import { APP_NAME } from '@/types/constant'
+import { APP_NAME } from '@/class/constant'
 import { removeToken } from '@/utils/stroage'
 @Component({
   name: 'login-page',

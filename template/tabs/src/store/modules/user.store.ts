@@ -4,8 +4,8 @@ import router, { resetRouter } from '@/router'
 import { PermissionModule } from './permission.store'
 import store from '@/store'
 import { UsersService } from '@/services/users'
-import { IUser } from '@/types/user'
-import { USER_ROLES } from '@/types/constant'
+import { IUser } from '@/class/user'
+import { USER_ROLES } from '@/class/constant'
 
 export interface IUserState {
   token: string

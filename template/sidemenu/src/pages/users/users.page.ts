@@ -1,7 +1,7 @@
 import { ModalUser } from '@/modals';
 import { UsersService } from '@/services/users';
 import { UserModule } from '@/store/modules/user.store';
-import { USER_ROLES } from '@/types/constant';
+import { USER_ROLES } from '@/class/constant';
 import { Toast } from '@/utils/toast';
 import { MessageBox } from 'element-ui';
 import { Component, Vue } from 'vue-property-decorator'

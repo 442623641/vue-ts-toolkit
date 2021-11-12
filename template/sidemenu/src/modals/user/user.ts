@@ -1,8 +1,8 @@
 // Created by Leo on 2021-01-25
-import { IUser } from '@/types/user'
+import { IUser } from '@/class/user'
 import { Toast } from '@/utils/toast'
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { USER_ROLES } from '@/types/constant'
+import { USER_ROLES } from '@/class/constant'
 import { UsersService } from '@/services/users'
 import { ElForm } from 'element-ui/types/form'
 import { UserModule } from '@/store/modules/user.store'
