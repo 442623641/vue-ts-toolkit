@@ -87,7 +87,7 @@ export default class extends Vue {
     if (this.showingChildNumber(item) > 1 || !item.children) {
       return item;
     }
-    if (item.children) {
+    if (item.children && !item.meta?.hidden) {
       for (const child of item.children) {
         if (!child.meta || !child.meta.hidden) {
           //如果只有有个子路路由，子路由等级提升，继承父路由icon

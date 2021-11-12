@@ -23,6 +23,7 @@ async function generate(type, inputPath, options) {
     return Log.error(`Generators are not supported in this project type ${type}.`);
   }
 
+
   // 业务文件夹路径
   let inputFilePath = ''
   let fileName = ''
@@ -44,21 +45,28 @@ async function generate(type, inputPath, options) {
     extendFileName = fileName + (moduli.extend ? ('.' + (typeof (moduli.extend) == 'string' ? moduli.extend : type)) : '');
     // 查看文件夹是否存在
     let isExists = await Files.checkFileIsExists(filePath);
-    if (isExists) return Log.error(`${filePath} 已存在`);
+    if (isExists) {
+      console.log(`${Colors.failure(`A merge conflicted on path "${filePath}"`)}`)
+      return Log.error(`Could not generate ${type}.`);
+    }
     // 创建文件夹
     await Files.createDir(filePath);
   } else {
     extendFileName = fileName + (moduli.extend ? ('.' + (typeof (moduli.extend) == 'string' ? moduli.extend : type)) : '');
     let fullFilePath = path.join(filePath, `${extendFileName}.ts`);
     let isExists = await Files.checkFileIsExists(fullFilePath);
-    if (isExists) return Log.error(`${fullFilePath} 已存在`);
+    if (isExists) {
+      console.log(`${Colors.failure(`A merge conflicted on path "${fullFilePath}"`)}`)
+      return Log.error(`Could not generate ${type}.`);
+    }
     await Files.checkFileIsExists(filePath) || await Files.createDir(filePath);
   }
 
   // 获取模板文件
+  const tmpOpt = { type, PascalCaseModuleName: Strings.toPascalCase(fileName), camelCaseModuleName: Strings.toCamelCase(fileName), fileName }
   if (moduli.templateString) {
-    Files.writeFileSync(filePath, `${extendFileName}.ts`, moduli.templateString, { type, moduleName: type == 'directive' ? fileName : Strings.toCamelCase(fileName), fileName })
-    Log.success(`创建成功：${Colors.input(`${filePath}/${extendFileName}.ts`)}`);
+    Files.writeFileSync(filePath, `${extendFileName}.ts`, moduli.templateString, tmpOpt)
+    Log.success(`[${Colors.success(`OK`)}] Generated ${Colors.input(`${type}`)} ${Colors.input(`${filePath}/${extendFileName}.ts`)}`);
   } else {
     let templatePath = path.join(Config.template, '/' + moduli.templatePath);
     let files = await Files.readDir(templatePath);
@@ -70,13 +78,14 @@ async function generate(type, inputPath, options) {
     }
     // 替换文件中的内容
     let newfiles = await Files.readDir(filePath);
-    await Files.fileStrReplace(`${filePath}`, newfiles, { fileName, type, moduleName: Strings.toPascalCase(fileName) });
+    await Files.fileStrReplace(`${filePath}`, newfiles, tmpOpt);
 
-    // 成功提示
-    Log.success(`创建成功：${Colors.input(`${filePath}`)}`);
+
     newfiles.forEach(v => {
-      Log.success(v);
+      Log.success(`${Colors.success(`CREATE`)} ${v}`);
     })
+    // 成功提示
+    console.log(`[${Colors.success(`OK`)}] Generated ${Colors.input(`${type}`)} ${Colors.input(`${filePath}`)}!`);
   }
 
 
@@ -84,11 +93,13 @@ async function generate(type, inputPath, options) {
   if (options.export || options.export === undefined && moduli.export && inputFilePath == moduli.dir) {
     let exportStr = '';
     if (moduli.floder) {
-      exportStr = `\nexport { default as ${Strings.toPascalCase(fileName)}${Strings.toPascalCase(type)} } from './${fileName}/${extendFileName}.vue';`
+      exportStr = `\nexport { default as ${tmpOpt.PascalCaseModuleName}${Strings.toPascalCase(type)} } from './${fileName}/${extendFileName}.vue';`
     } else {
       exportStr = `\nexport * from './${extendFileName}';`;
     }
-    Files.writeFileSync(path.join(Config.entry, `src`, inputFilePath), 'index.ts', exportStr)
+    let exportRouteFilePath = path.join(Config.entry, `src`, inputFilePath)
+    Files.writeFileSync(exportRouteFilePath, 'index.ts', exportStr)
+    Log.success(`${Colors.success(`UPDATE`)} ${exportRouteFilePath}/index.ts`);
   }
 
 }
@@ -111,6 +122,7 @@ const routeExport = async function (fileName, route, filePath) {
       isExist = await Files.checkFileIsExists(routingFilePath);
       if (isExist) {
         Files.replaceTextSync(routingFilePath, [[`}\n  ]\n}`, `},${pageRouteStr}]\n}`]]);
+        Log.success(`${Colors.success(`UPDATE`)} ${routingFilePath}`);
         return
       }
       routerStr = `import { RouteConfig } from 'vue-router'\nimport Layout from '@/layout/index.vue'\n\nexport const ${camelfileName}Routing: RouteConfig = {\n  path: '/${parentPath}',\n  component: Layout,\n  redirect: '/${parentPath}/${childrenPath}',\n  meta: {\n    title: '${parentPath}',\n    icon: '${parentPath}'\n  },\n  children: [${pageRouteStr}]\n}`
@@ -126,10 +138,12 @@ const routeExport = async function (fileName, route, filePath) {
   let routeFileName = `${camelfileName}.routing.ts`;
 
   Files.writeFileSync(pageRouteFilePath, routeFileName, routerStr);
+  Log.success(`${Colors.success(`CREATE`)} ${pageRouteFilePath}/${routeFileName}`);
   // 查看router/index.ts是否存在
   let routerIndexPath = path.join(Config.entry, `src`, 'router/index.ts')
   let isExist = await Files.checkFileIsExists(routerIndexPath);
   if (!isExist) return;
   let routeTag1 = `{\n    path: '/',`;
   Files.replaceTextSync(routerIndexPath, [['Vue.use\\(VueRouter\\)', `import { ${camelfileName}Routing } from '@${path.join(pageRouteFilePath, routeFileName).slice(3, -3)}'\nVue.use(VueRouter)`], [routeTag1, `${camelfileName}Routing,\n  ${routeTag1}`]]);
+  Log.success(`${Colors.success(`UPDATE`)} ${routerIndexPath}`);
 };

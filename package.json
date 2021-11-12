@@ -1,8 +1,8 @@
 {
   "name": "vue-ts-toolkit",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "scripts": {
-    "publish": "npm publish --registry registry https://registry.npmjs.org/"
+    "publish": "npm publish --registry https://registry.npmjs.org"
   },
   "bin": {
     "vtx": "./index.js"

@@ -23,7 +23,7 @@ const position = () => {
   return document.documentElement.scrollTop || (document.body.parentNode as HTMLElement).scrollTop || document.body.scrollTop
 }
 
-export const scrollTo = (to: number, duration: number, callback?: Function) => {
+export const scrollTo = (to: number, duration: number, callback?: any) => {
   const start = position()
   const change = to - start
   const increment = 20

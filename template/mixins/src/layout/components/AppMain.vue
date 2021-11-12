@@ -3,7 +3,7 @@
     <SideBar class="sidebar-container" />
     <section>
       <transition name="fade-transform" mode="out-in">
-        <keep-alive>
+        <keep-alive :include="cachePages">
           <router-view :key="key" />
         </keep-alive>
       </transition>
@@ -13,6 +13,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { PermissionModule } from "@/store/modules/permission.store";
+import { RouteConfig } from "vue-router";
 import SideBar from "./Sidebar/index.vue";
 @Component({
   name: "AppMain",
@@ -21,6 +23,23 @@ import SideBar from "./Sidebar/index.vue";
 export default class extends Vue {
   get key() {
     return this.$route.path;
+  }
+
+  get cachePages() {
+    return this.getRouteName(<RouteConfig>{
+      children: PermissionModule.routes,
+    });
+  }
+
+  private getRouteName(item: RouteConfig) {
+    if (item.children && item.children.length) {
+      return item.children.reduce((prev, cur) => {
+        let name = this.getRouteName(cur);
+        return Array.isArray(name) ? prev.concat(name) : prev;
+      }, []);
+    } else {
+      return item.name && !item.meta?.noCache ? [item.name] : null;
+    }
   }
 }
 </script>

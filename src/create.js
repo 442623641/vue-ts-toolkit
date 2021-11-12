@@ -67,8 +67,10 @@ module.exports = async function (name, template) {
       console.log(`Not erasing existing project in ${Colors.input(`./${name}`)}.`)
       return
     } else {
+      console.log(`start removing floder ${Colors.input(`./${name}`)}...`)
       const fs = require('fs');
       fs.rmdirSync(projectPath, { recursive: true, force: true });
+      console.log(`${Colors.input(`./${name}`)} has removed`)
     }
   }
 
