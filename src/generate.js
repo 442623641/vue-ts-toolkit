@@ -2,7 +2,7 @@ const path = require('path');                         // 路径模块
 const Log = require("./utils/log");                       // 控制台输出
 const Files = require('./utils/file');                      // 工具函数
 const Strings = require('./utils/string');                      // 工具函数
-let Config = require('../config');                    // 获取配置项
+const Config = require('../config');                    // 获取配置项
 const Colors = require('./utils/colors');
 // Main
 module.exports = function (type, name, createDir) {
